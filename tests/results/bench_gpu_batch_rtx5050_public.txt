@@ -1,0 +1,27 @@
+bench_gpu_batch  2026-11-19 20:38:26
+GPU: NVIDIA GeForce RTX 5050, CC 12.0, 6.8 GB free of 8.0 GB
+
+--- ordinary pool: 524288 rows ---
+GPU rows finite      : 524288 / 524288
+max |Qgpu - Qcpu|    : 1.705e-13 deg (wrapped)
+
+     N     cpu us   cpu us/tgt     gpu us   gpu us/tgt   speedup
+     8      256.6       32.081      408.2       51.019     0.63x
+    32       61.8        1.931      405.7       12.677     0.15x
+   128      103.5        0.809      429.1        3.352     0.24x
+   512      300.2        0.586      506.0        0.988     0.59x
+  1024      439.5        0.429      522.4        0.510     0.84x
+  4096     1030.0        0.251      726.1        0.177     1.42x
+  8192     1926.7        0.235      902.0        0.110     2.14x
+ 32768     7689.0        0.235     3129.6        0.096     2.46x
+131072    41626.5        0.318    13936.8        0.106     2.99x
+524288   185951.0        0.355    54806.0        0.105     3.39x
+cpu single-target    : median 192.10 us, p95 271.10 us
+
+--- fallback rows (GPU decline -> CPU row engine) ---
+center               ->     0.0000   180.0000     0.0000  -180.0000
+interior 39.5 deg    ->     9.4444   -17.7685    -9.4444    17.7685
+boundary 40 deg      ->     0.0000    -0.0000    -0.0000     0.0000
+unreachable 50 deg   -> NaN (declined or rejected, no throw)
+NaN row              -> NaN (declined or rejected, no throw)
+zero row             -> NaN (declined or rejected, no throw)

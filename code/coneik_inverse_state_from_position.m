@@ -4,7 +4,7 @@ function [q,qdot,qddot,info] = coneik_inverse_state_from_position(gamma,gamma_do
 % normalized legacy options/policy and resolved any explicit model. MODEL is
 % [] only for the implicit default. CANDIDATES and POSITION_INFO must be the
 % unchanged two base branches and metadata for this gamma/model, produced by
-% inverse_motion_analysis within the current call (not an external cache).
+% the internal position engine within the current call (not an external cache).
 % This is an implementation helper, not a supported public/cache interface.
 % PREVIOUS_Q selects/reconstructs a representative using the legacy rule; it
 % is deliberately not treated as an already selected position. No position

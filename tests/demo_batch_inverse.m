@@ -12,11 +12,13 @@ function demo_batch_inverse()
 
     [result, stats] = batch_inverse_dat(data_file, 7);
 
-    assert(stats.n_total == 101, 'Unexpected synthetic sample length.');
+    assert(stats.n_total == 10001, 'Unexpected synthetic sample length.');
     assert(stats.n_fail == 0, 'Synthetic sample contains unreachable rows.');
     assert(all(isfinite(result(:))), 'Batch result contains non-finite values.');
 
-    max_step = max(max(abs(diff(result(:, 2:3), 1, 1))));
+    % Physical step size: unwrap first so a +/-360 degree representative
+    % jump at the branch cut does not masquerade as a discontinuity.
+    max_step = max(max(abs(rad2deg(diff(unwrap(deg2rad(result(:, 2:3))))))));
     fprintf('Synthetic batch check passed: %d/%d rows solved.\n', ...
         stats.n_ok, stats.n_total);
     fprintf('Maximum adjacent theta step: %.6f deg.\n', max_step);

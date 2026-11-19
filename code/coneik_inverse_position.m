@@ -15,10 +15,10 @@ function [q11,q21,q12,q22,info] = coneik_inverse_position(gamma1,gamma2,model)
     model = coneik_resolve_model(model);
     if model.is_default
         if nargout>4
-            [q11,q21,q12,q22,info] = inverse_motion_analysis(gamma1,gamma2);
+            [q11,q21,q12,q22,info] = coneik_inverse_default_resolved(gamma1,gamma2,true);
             info.model_key = model.key;
         else
-            [q11,q21,q12,q22] = inverse_motion_analysis(gamma1,gamma2);
+            [q11,q21,q12,q22] = coneik_inverse_default_resolved(gamma1,gamma2,true);
         end
         return;
     end

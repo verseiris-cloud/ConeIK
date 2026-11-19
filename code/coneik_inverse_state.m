@@ -59,7 +59,11 @@ function [q, qdot, qddot, info] = coneik_inverse_state(gamma, gamma_dot, gamma_d
 
     model=[];
     if isfield(options,'model'), model=coneik_resolve_model(options.model); end
-    [q11,q21,q12,q22,position_info] = inverse_motion_analysis(gamma(1),gamma(2),model);
+    if ~isempty(model) && ~model.is_default
+        [q11,q21,q12,q22,position_info] = coneik_inverse_position_resolved(gamma(1),gamma(2),model);
+    else
+        [q11,q21,q12,q22,position_info] = coneik_inverse_default_resolved(gamma(1),gamma(2),true);
+    end
     [q,qdot,qddot,info] = coneik_inverse_state_from_position(...
         gamma,gamma_dot,gamma_ddot,options,policy,model,[q11,q12;q21,q22],position_info);
 end

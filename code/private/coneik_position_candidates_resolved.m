@@ -30,7 +30,7 @@ function [Q,meta]=coneik_position_candidates_resolved(gamma,options,cache,model,
     end
     if isempty(cache)
         if isempty(model)||model.is_default
-            [q11,q21,q12,q22,position_info]=inverse_motion_analysis(gamma(1),gamma(2));
+            [q11,q21,q12,q22,position_info]=coneik_inverse_default_resolved(gamma(1),gamma(2),true);
         else
             [q11,q21,q12,q22,position_info]=coneik_inverse_position_resolved(gamma(1),gamma(2),model);
         end
